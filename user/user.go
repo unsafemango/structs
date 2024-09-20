@@ -14,6 +14,13 @@ type User struct {
 	createdAt time.Time
 }
 
+// struct type that builds up on the user struct type by embedding the user in it
+type Admin struct {
+	email    string
+	password string
+	User
+}
+
 // method for the struct to output data
 func (user *User) OutputUserDetails() { // this is a special kind of argument called the receiver argument pointing at the user struct
 	// ...
@@ -24,6 +31,19 @@ func (user *User) OutputUserDetails() { // this is a special kind of argument ca
 func (user *User) ClearUserName() {
 	user.firstName = ""
 	user.lastName = ""
+}
+
+func NewAdmin(email, password string) Admin {
+	return Admin{
+		email:    email,
+		password: password,
+		User: User{
+			firstName: "ADMIN",
+			lastName:  "ADMIN",
+			birthDate: "---",
+			createdAt: time.Now(),
+		},
+	}
 }
 
 // utility function to create a struct (constructor intialization)
