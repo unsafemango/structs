@@ -1,21 +1,37 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"unsafemango.com/structs/user"
+)
 
 func main() {
-	firstName := getUserData("Please enter your first name: ")
-	lastName := getUserData("Please enter your last name: ")
-	birthdate := getUserData("Please enter your birthdate (MM/DD/YYYY)")
+	userFirstName := getUserData("Please enter your first name: ")
+	userLastName := getUserData("Please enter your last name: ")
+	userBirthDate := getUserData("Please enter your birthdate (MM/DD/YYYY): ")
+
+	// instance of a struct
+	// struct literal
+	appUser, err := user.New(userFirstName, userLastName, userBirthDate)
+
+	if err != nil {
+		// exit out of the application
+		fmt.Println(err)
+		return
+	}
 
 	// ... do something awesome with that gathered data
+	appUser.OutputUserDetails()
+	appUser.ClearUserName()
 
-	fmt.Println(firstName, lastName, birthdate)
+	appUser.OutputUserDetails()
 }
 
 func getUserData(promtpText string) string {
 	fmt.Print(promtpText)
 
 	var value string
-	fmt.Scan(&value)
+	fmt.Scanln(&value)
 	return value
 }
