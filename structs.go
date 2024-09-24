@@ -7,6 +7,7 @@ import (
 )
 
 func main() {
+	generic()
 	userFirstName := getUserData("Please enter your first name: ")
 	userLastName := getUserData("Please enter your last name: ")
 	userBirthDate := getUserData("Please enter your birthdate (MM/DD/YYYY): ")
